@@ -35,6 +35,45 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Portfolio());
+        body: Column(
+          children: [
+            new Container(
+              padding: new EdgeInsets.only(top: 18.0),
+              child: new Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Text('\$  ',
+                      style: new TextStyle(
+                        fontSize: 15.0,
+                        fontFamily: 'Roboto',
+                        color: new Color(0xFF26C6DA),
+                      )),
+                  new Text(
+                    '15,200',
+                    style: new TextStyle(
+                        fontSize: 35.0,
+                        fontFamily: 'Roboto',
+                        color: new Color(0xFF26C6DA)),
+                  ),
+                ],
+              ),
+            ),
+            new Container(
+              padding: new EdgeInsets.only(bottom: 18.0),
+              child: new Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text("Portfolio Value"),
+                  ),
+                ],
+              ),
+            ),
+            Portfolio()
+          ],
+        ));
   }
 }
