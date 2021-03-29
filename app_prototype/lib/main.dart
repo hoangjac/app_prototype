@@ -29,51 +29,65 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> _widgetOptions = <Widget>[
+      Text(
+        'Index 0: Home',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 1: Camera',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 2: Info',
+        style: optionStyle,
+      ),
+      Portfolio()
+    ];
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Column(
-          children: [
-            new Container(
-              padding: new EdgeInsets.only(top: 18.0),
-              child: new Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Text('\$  ',
-                      style: new TextStyle(
-                        fontSize: 15.0,
-                        fontFamily: 'Roboto',
-                        color: new Color(0xFF26C6DA),
-                      )),
-                  new Text(
-                    '15,200',
-                    style: new TextStyle(
-                        fontSize: 35.0,
-                        fontFamily: 'Roboto',
-                        color: new Color(0xFF26C6DA)),
-                  ),
-                ],
-              ),
-            ),
-            new Container(
-              padding: new EdgeInsets.only(bottom: 18.0),
-              child: new Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.0),
-                    child: Text("Portfolio Value"),
-                  ),
-                ],
-              ),
-            ),
-            Portfolio()
-          ],
-        ));
+      appBar: AppBar(
+        title: const Text('Capstone Prototype'),
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, // so bar isn't white
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera),
+            label: 'Camera',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Info',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.money),
+            label: 'Portfolio',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
+    );
   }
 }
