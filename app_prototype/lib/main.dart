@@ -1,9 +1,14 @@
+import 'package:app_prototype/screens/home.dart';
+import 'package:app_prototype/screens/info.dart';
+import 'package:app_prototype/screens/camera.dart';
 import 'package:app_prototype/screens/portfolio.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+final scakey = new GlobalKey<_MyHomePageState>();
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -14,15 +19,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Portfolio Demo Page'),
+      home: MyHomePage(key: scakey),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -30,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -42,24 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      Text(
-        'Index 0: Home',
-        style: optionStyle,
-      ),
-      Text(
-        'Index 1: Camera',
-        style: optionStyle,
-      ),
-      Text(
-        'Index 2: Info',
-        style: optionStyle,
-      ),
+      Home(),
+      Camera(),
+      Info(),
       Portfolio()
     ];
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Capstone Prototype'),
+        title: const Text('PokéFolio'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
